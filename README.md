@@ -18,10 +18,14 @@ history, the chemistry and the photographers.
 Built on [Didactics](https://github.com/RobertLitzke/Didactics), the lesson
 library taken out of
 [Clouds](https://github.com/RobertLitzke/CloudsWhatAreTheyUpTo): the lesson
-player, figures, checks, footnotes, glossary, reference page, quiz, shell and
-PWA build. It is a git dependency pinned to a commit in `package.json`; to
+player, figures and their frames and sliders, checks, footnotes, glossary,
+reference page, quiz, photo credits, figure gallery, shell and PWA build. It
+is a git dependency pinned to a commit in `package.json`; to
 take a newer one, run `npm install github:RobertLitzke/Didactics#<sha>`, then
 `npm test` and `npm run build`. There is no radio, so the save has none.
+Didactics ships TypeScript source, which Node will not run from
+`node_modules`, so the photo tools run through `vite-node` (it comes with
+Vitest) rather than `node --experimental-strip-types`.
 
 ## What is built
 
@@ -60,8 +64,10 @@ npm run dev
 ```
 
 Opens on http://localhost:5460. http://localhost:5460/figures.html shows every
-figure on one page (dev server only); add `?frozen` for the same picture every
-load, or `?only=<figure id>` for one figure.
+figure on one page (dev server only, Didactics' gallery); add `?frozen` for the
+same picture every load, `?imperial` for distances in feet, or
+`?only=<figure id>` for one figure. The page gets `data-ready` once every
+photo has been drawn, for screenshots.
 
 | Command | What it does |
 |---|---|

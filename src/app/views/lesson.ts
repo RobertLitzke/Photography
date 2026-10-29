@@ -15,6 +15,6 @@ export const lessonView = kitLessonView({
   store,
   prose,
   // "Lesson 1 of 12": the whole plan, which the home page shows too.
-  of: () => LESSONS.length,
+  countComing: true,
   hero: (l) => makeScene({ seed: 30 + l.n, time: l.n % 2 ? 'morning' : 'evening' }),
 });

@@ -4,7 +4,7 @@ import { isDiagram } from 'didactics/blocks';
 import { lessonProblems } from 'didactics/lesson';
 import { referenceProblems } from 'didactics/reference';
 import { FIGURES } from '../src/app/figures';
-import { FIGURE_IDS, isWritten, LESSONS, type Question } from '../src/core/lessons';
+import { FIGURE_IDS, isWritten, LESSONS } from '../src/core/lessons';
 import { isSubjectId } from '../src/core/photos';
 import { REFERENCE } from '../src/core/reference';
 import { DECK } from '../src/app/views/quiz';
@@ -25,27 +25,6 @@ describe('lessons', () => {
       const last = l.parts[l.parts.length - 1];
       expect(last.blocks.some((b) => isDiagram(b) && FIGURES[b.id].quiz), l.id).toBe(true);
       expect(l.learned.length, l.id).toBeGreaterThan(0);
-    }
-  });
-
-  it('ask questions with a real answer and pictures that exist', () => {
-    for (const l of LESSONS) for (const p of l.parts) for (const b of p.blocks) {
-      if (!isDiagram(b) || b.id !== 'check') continue;
-      const items = (b.options?.items ?? []) as Question[];
-      expect(items.length).toBeGreaterThan(0);
-      for (const q of items) {
-        expect(q.answer, q.question).toBeGreaterThanOrEqual(0);
-        expect(q.answer, q.question).toBeLessThan(q.options.length);
-        expect(q.why.length, q.question).toBeGreaterThan(10);
-        if (q.picture) expect(isSubjectId(q.picture), q.picture).toBe(true);
-      }
-    }
-  });
-
-  it('show photos of subjects that exist', () => {
-    for (const l of LESSONS) for (const p of l.parts) for (const b of p.blocks) {
-      if (!isDiagram(b) || b.id !== 'photo') continue;
-      expect(isSubjectId(String(b.options?.subject)), String(b.options?.subject)).toBe(true);
     }
   });
 

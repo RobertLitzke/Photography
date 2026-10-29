@@ -9,8 +9,9 @@
 // is sharp. Light is gold, and what is out of focus grey-blue.
 
 import type { FootnoteSet } from 'didactics/footnote';
-import { slider as kitSlider, type Slider } from 'didactics/figure';
+import { slider as kitSlider, type Slider, type SliderOptions } from 'didactics/figure';
 import { prose as kitProse } from 'didactics/lesson';
+import { length, type Units } from 'didactics/units';
 import { APERTURE_STEPS, ISO_STEPS, SHUTTER_STEPS, apertureLabel, shutterLabel } from '../../core/camera';
 
 export {
@@ -55,30 +56,21 @@ export function tint(hex: string, alpha: number): string {
   return `rgba(${n >> 16}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
 }
 
-/** A labelled slider whose thumb wears one of the palette's colours. */
-export function slider(label: string, min: number, max: number, step: number, value: number, show: (v: number) => string, onInput: (v: number) => void, color: ColorKey = 'ink'): Slider {
-  return kitSlider(label, min, max, step, value, show, onInput, COL[color]);
-}
-
 /**
- * A slider that steps through a list of camera settings rather than a range of
- * numbers, so every stop it lands on is one the camera really offers. Its
- * value is the index; `at()` gives the setting.
+ * A labelled slider whose thumb wears one of the palette's colours: either
+ * Didactics' positional form, or its options form, which also walks a list of
+ * set values (`steps`) or runs on a log scale (`scale: 'log'`).
  */
-export function stepSlider(label: string, steps: readonly number[], value: number, show: (v: number) => string, onInput: (v: number) => void, color: ColorKey = 'ink'): Slider & { at: () => number } {
-  const start = nearestStep(steps, value);
-  const s = slider(label, 0, steps.length - 1, 1, start, (i) => show(steps[i]), (i) => onInput(steps[i]), color);
-  return { ...s, at: () => steps[s.value()] };
+export function slider(label: string, min: number, max: number, step: number, value: number, show: (v: number) => string, onInput: (v: number) => void, color?: ColorKey): Slider;
+export function slider(label: string, o: Omit<SliderOptions, 'color'> & { color?: ColorKey }): Slider;
+export function slider(label: string, a: number | (Omit<SliderOptions, 'color'> & { color?: ColorKey }), max?: number, step?: number, value?: number, show?: (v: number) => string, onInput?: (v: number) => void, color: ColorKey = 'ink'): Slider {
+  if (typeof a === 'object') return kitSlider(label, { ...a, color: COL[a.color ?? 'ink'] });
+  return kitSlider(label, a, max!, step!, value!, show!, onInput!, COL[color]);
 }
 
-/** The place in `steps` nearest to `value`, by ratio, so stops are judged evenly. */
-export function nearestStep(steps: readonly number[], value: number): number {
-  let best = 0;
-  for (let i = 1; i < steps.length; i++) {
-    if (Math.abs(Math.log(steps[i] / value)) < Math.abs(Math.log(steps[best] / value))) best = i;
-  }
-  return best;
-}
+/** A slider over the settings the camera really offers, one stop at a time. */
+const stepSlider = (label: string, steps: readonly number[], value: number, show: (v: number) => string, onInput: (v: number) => void, color: ColorKey): Slider =>
+  slider(label, { steps, value, show, onInput, color });
 
 export const apertureSlider = (value: number, onInput: (v: number) => void) =>
   stepSlider('Aperture', APERTURE_STEPS, value, apertureLabel, onInput, 'aperture');
@@ -89,17 +81,13 @@ export const shutterSlider = (value: number, onInput: (v: number) => void) =>
 export const isoSlider = (value: number, onInput: (v: number) => void) =>
   stepSlider('ISO', ISO_STEPS, value, (v) => String(v), onInput, 'sensor');
 
-/** The zoom slider, in the equivalent millimetres the camera's own display shows. */
+/** The zoom slider, in the equivalent millimetres the camera's own display shows, on a log scale. */
 export const zoomSlider = (value: number, onInput: (v: number) => void) =>
-  slider('Zoom', Math.log2(24), Math.log2(2000), 0.02, Math.log2(value), (l) => `${Math.round(2 ** l)} mm`, (l) => onInput(2 ** l), 'subject');
+  slider('Zoom', { min: 24, max: 2000, scale: 'log', step: 1, value, show: (v) => `${Math.round(v)} mm`, onInput, color: 'subject' });
 
-/** A distance, said the way a person would: 40 cm, 3.5 m, 120 m. */
-export function distance(m: number): string {
-  if (!isFinite(m)) return 'the horizon';
-  if (m < 1) return `${Math.round(m * 100)} cm`;
-  if (m < 10) return `${m.toFixed(1)} m`;
-  if (m < 1000) return `${Math.round(m)} m`;
-  return `${(m / 1000).toFixed(1)} km`;
+/** A distance in the reader's units, said the way a person would: 40 cm, 3.5 m, 120 m; 16 in, 11 ft, 390 ft. */
+export function distance(m: number, units: Units): string {
+  return isFinite(m) ? length(m, units) : 'the horizon';
 }
 
 /** A paragraph of lesson text: **bold**, *italic*, [[words|key]] in the colour COL[key], and [^id] footnotes. */
