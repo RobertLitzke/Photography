@@ -2,8 +2,8 @@
 // open, and which of the two blurs you are looking at. A bird's wings and your
 // own hands are two different problems with the same dial.
 
-import { svg } from 'lesson-kit/dom';
-import { label, line, note, redraw } from 'lesson-kit/draw';
+import { svg } from 'didactics/dom';
+import { label, line, note, redraw } from 'didactics/draw';
 import { shutterLabel } from '../../core/camera';
 import { shoot } from '../../core/shot';
 import { shotPhoto } from '../picture';

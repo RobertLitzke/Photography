@@ -1,11 +1,11 @@
 // The frame a photograph figure is built in: the picture, one text box that
 // says what the settings are doing to it, and the dials under it. It is
-// lesson-kit's frame() with a canvas in place of the drawing.
+// Didactics' frame() with a canvas in place of the drawing.
 //
 // Every figure that re-exposes a photograph goes through here, so they all
 // look the same and all say their settings the same way.
 
-import { el } from 'lesson-kit/dom';
+import { el } from 'didactics/dom';
 import type { Photo } from '../../core/photos';
 import { settingsLine, type Shot } from '../../core/shot';
 import { photoView, type PhotoView } from '../photo/view';

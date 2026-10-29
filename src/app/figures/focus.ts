@@ -3,8 +3,8 @@
 // band. One ray diagram, which shows why, and one photograph, which shows what
 // it looks like.
 
-import { svg } from 'lesson-kit/dom';
-import { label, line, note, redraw } from 'lesson-kit/draw';
+import { svg } from 'didactics/dom';
+import { label, line, note, redraw } from 'didactics/draw';
 import { P950, apertureLabel, blurCircle, fromEquivalent, sharpEnough } from '../../core/camera';
 import { shoot } from '../../core/shot';
 import { shotPhoto } from '../picture';

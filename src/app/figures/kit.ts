@@ -1,6 +1,6 @@
 // What every figure is made of, for this course. The figure machinery itself
 // (a drawing, one text box, controls, a task the lesson waits on) is
-// lesson-kit's figure.ts, re-exported here; this file adds the palette and the
+// Didactics' figure.ts, re-exported here; this file adds the palette and the
 // pieces every camera figure needs.
 //
 // A colour means the same thing in every figure and in the text around it.
@@ -8,15 +8,15 @@
 // and its noise violet, and focus green, which is also the colour of whatever
 // is sharp. Light is gold, and what is out of focus grey-blue.
 
-import type { FootnoteSet } from 'lesson-kit/footnote';
-import { slider as kitSlider, type Slider } from 'lesson-kit/figure';
-import { prose as kitProse } from 'lesson-kit/lesson';
+import type { FootnoteSet } from 'didactics/footnote';
+import { slider as kitSlider, type Slider } from 'didactics/figure';
+import { prose as kitProse } from 'didactics/lesson';
 import { APERTURE_STEPS, ISO_STEPS, SHUTTER_STEPS, apertureLabel, shutterLabel } from '../../core/camera';
 
 export {
   animate, choices, figure, frame, lock, lockIn, placeable, quiz, textBox,
   type Choices, type FigureContext, type FigureFactory, type FigureHandle, type Frame, type Options, type Slider, type Task,
-} from 'lesson-kit/figure';
+} from 'didactics/figure';
 
 export const COL = {
   ink: '#1d2430',

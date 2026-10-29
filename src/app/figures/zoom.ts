@@ -3,8 +3,8 @@
 // zoom (a dimmer lens, a thinner slice of sharpness, and every wobble
 // magnified).
 
-import { svg } from 'lesson-kit/dom';
-import { label, line, note, redraw } from 'lesson-kit/draw';
+import { svg } from 'didactics/dom';
+import { label, line, note, redraw } from 'didactics/draw';
 import { P950, angleOfView, apertureLabel, fromEquivalent, widestAperture } from '../../core/camera';
 import { shoot } from '../../core/shot';
 import { shotPhoto } from '../picture';

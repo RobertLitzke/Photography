@@ -28,10 +28,7 @@
     "vite-plugin-singlefile": "^2.3.0",
     "vitest": "^3.0.0"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
-    "lesson-kit": "*"
+    "didactics": "github:RobertLitzke/Didactics#43ee1e20ea099545668842cf87c5e201d01be5ee"
   }
 }

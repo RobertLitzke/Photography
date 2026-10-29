@@ -3,8 +3,8 @@
 // that costs grain, and grain is easiest to understand as counting: too few
 // photons, and the count comes out rough.
 
-import { svg } from 'lesson-kit/dom';
-import { label, line, note, redraw } from 'lesson-kit/draw';
+import { svg } from 'didactics/dom';
+import { label, line, note, redraw } from 'didactics/draw';
 import { P950, apertureLabel, exposureValue, isoFor, pixelNoise, shutterLabel } from '../../core/camera';
 import { shoot } from '../../core/shot';
 import { shotPhoto } from '../picture';

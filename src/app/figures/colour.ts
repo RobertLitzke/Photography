@@ -2,8 +2,8 @@
 // the camera guesses which one it was, and that the guess is a dial you can
 // take off automatic when the guess goes wrong (snow, shade, dawn).
 
-import { svg } from 'lesson-kit/dom';
-import { label, line, note, redraw } from 'lesson-kit/draw';
+import { svg } from 'didactics/dom';
+import { label, line, note, redraw } from 'didactics/draw';
 import { lightColor } from '../../core/camera';
 import { shoot } from '../../core/shot';
 import { shotPhoto } from '../picture';

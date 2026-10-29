@@ -3,6 +3,7 @@
 // reach it. Figures that re-expose a photograph are built too: with an empty
 // library they fall back to the "no photograph yet" card, which must not throw.
 import { describe, expect, it } from 'vitest';
+import { isDiagram } from 'didactics/blocks';
 import { FIGURES } from '../src/app/figures';
 import { makeScene } from '../src/app/scene/field';
 import { FIGURE_IDS, LESSONS, type FigureId } from '../src/core/lessons';
@@ -31,8 +32,8 @@ describe('figures', () => {
   it('builds every figure a lesson asks for, with that lesson’s options', () => {
     const ctx = context();
     for (const l of LESSONS) for (const p of l.parts) for (const b of p.blocks) {
-      if (b.kind !== 'figure') continue;
-      expect(FIGURES[b.figure as FigureId](ctx, b.goal, b.options).node, b.figure).toBeInstanceOf(HTMLElement);
+      if (!isDiagram(b)) continue;
+      expect(FIGURES[b.id as FigureId](ctx, b.goal, b.options).node, b.id).toBeInstanceOf(HTMLElement);
     }
   });
 

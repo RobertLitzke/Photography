@@ -8,7 +8,7 @@
 // picture are, so most photos also ship a depth map (a small grey picture,
 // white for near and black for far) and a note of the scene they stand for.
 
-import type { Rng } from 'lesson-kit/rng';
+import type { Rng } from 'didactics/rng';
 
 /**
  * Licences a photo may carry. Public domain and the attribution licences

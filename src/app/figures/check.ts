@@ -2,9 +2,9 @@
 // picture of its subject when it names one (a photo, or the drawing that
 // stands in for it). The questions are the block's `items` in the lesson JSON.
 
-import { el } from 'lesson-kit/dom';
-import { makeRng, shuffle } from 'lesson-kit/rng';
-import { freshSeed } from 'lesson-kit/ui';
+import { el } from 'didactics/dom';
+import { makeRng, shuffle } from 'didactics/rng';
+import { freshSeed } from 'didactics/ui';
 import type { Question } from '../../core/lessons';
 import { isSubjectId } from '../../core/photos';
 import { picture } from '../picture';

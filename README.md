@@ -15,10 +15,13 @@ frame crops as the lens zooms, and the whole picture tips warm or cold with
 the white balance. There is no story and no mentor; footnotes carry the
 history, the chemistry and the photographers.
 
-Built on `packages/lesson-kit`, copied from
-[Clouds](https://github.com/RobertLitzke/CloudsWhatAreTheyUpTo) (by way of
-[Dirt](https://github.com/RobertLitzke/Dirt)); fixes to the kit are copied
-between the repos by hand. The kit's radio is off.
+Built on [Didactics](https://github.com/RobertLitzke/Didactics), the lesson
+library taken out of
+[Clouds](https://github.com/RobertLitzke/CloudsWhatAreTheyUpTo): the lesson
+player, figures, checks, footnotes, glossary, reference page, quiz, shell and
+PWA build. It is a git dependency pinned to a commit in `package.json`; to
+take a newer one, run `npm install github:RobertLitzke/Didactics#<sha>`, then
+`npm test` and `npm run build`. There is no radio, so the save has none.
 
 ## What is built
 
@@ -133,7 +136,7 @@ have no photograph yet and say so on the page.
 ## Adding a lesson
 
 1. Write `src/data/lessons/<id>.json` (the format is in
-   `packages/lesson-kit/README.md`) and import it in `src/core/lessons.ts`, in
+   Didactics' README, "A lesson, as JSON") and import it in `src/core/lessons.ts`, in
    place of that lesson's `planned(...)` entry.
 2. Put its figures in `src/app/figures/<id>.ts`, add their ids to
    `FIGURE_IDS`, and name them in `src/app/figures/index.ts`.
@@ -150,7 +153,7 @@ src/core/     pure TypeScript, no DOM; unit-tested
   lessons.ts    the twelve lessons and the figure ids
   photos.ts     subjects, the photo entry shape, scenes and accepted licences
   reference.ts  the reference page's shape
-  save.ts       the save, on top of lesson-kit's progress.ts
+  save.ts       the save, on top of Didactics' progress
 src/data/     lessons/*.json, reference.json, quiz.json, glossary.json, photos.json
 src/app/      store.ts, asset.ts, picture.ts, mark.ts (the aperture icon)
   photo/        film.ts (the renderer), view.ts (the canvas in a figure)
@@ -159,7 +162,6 @@ src/app/      store.ts, asset.ts, picture.ts, mark.ts (the aperture icon)
   scene/        field.ts, the drawn valley at the top of each page
   views/        home, lesson, reference, quiz, settings, credits
 tools/        photos/ (find, fetch, import, depth), gallery/, icons.mjs
-packages/lesson-kit/   the lesson engine, figures, quiz, shell and build
 ```
 
 ## Deploy
