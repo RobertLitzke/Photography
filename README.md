@@ -1,5 +1,7 @@
 # Out of Auto
 
+> **Moved.** Out of Auto now lives in `courses/photography/` of [RobertLitzke/CloudsWhatAreTheyUpTo](https://github.com/RobertLitzke/CloudsWhatAreTheyUpTo), with its history, and is served at https://robertlitzke.github.io/CloudsWhatAreTheyUpTo/photography/. This repository only deploys a page that forwards there (`moved/`); work happens in the new one.
+
 A photography workbook for someone who owns a long zoom and leaves it on
 automatic. Short illustrated lessons, in the manner of Bartosz Ciechanowski's
 explainers, on what the camera is deciding for you and how to take each
